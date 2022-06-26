@@ -2,7 +2,10 @@ import React from 'react'
 import { Link } from 'react-router-dom';
 import { Stack } from '@mui/material';
 
-import Logo from '../assets/images/Logo.png';
+import Logo from '../../assets/images/Logo.png';
+import './Navbar.css';
+import NavbarLoggedLinks from './NavbarLoggedLinks';
+import { AppToken } from '../../utils/AppToken';
 
 const Navbar = () => {
   return (
@@ -21,16 +24,11 @@ const Navbar = () => {
         >
             <img src={Logo} />
         </Link>
-        <Stack
-            direction="row"    
-            gap="40px"
-            fontSize="24px"
-            alignItems="flex-end"
-        >
-            <Link to="/" style={{textDecoration: 'none', color: '#3A1212', borderBottom: '3px solid #FF2625'}}>Home</Link>
-            <a href="#exercises" style={{textDecoration: 'none', color: '#3A1212'}}>
-                Exercises
-            </a>
+        <Stack direction="row" gap="40px" fontSize="24px" alignItems="flex-end">
+            <Link to="/" style={{borderBottom: '3px solid #FF2625'}}>Home</Link>
+        </Stack>
+        <Stack direction="row" gap="40px" fontSize="24px" alignItems="flex-end">
+            {AppToken.getToken() ? <NavbarLoggedLinks /> : ''}
         </Stack>
     </Stack>
   )
